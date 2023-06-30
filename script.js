@@ -100,7 +100,13 @@ function inputButton(element) {
             } else firstNum += element.textContent;
             outputText.textContent += element.textContent;
         } else if (element.classList.contains('operator')) {
-            if (firstNum != '') {
+            if (firstNum == "0" || firstNum == "") {
+                if (element.classList.contains('bsub')) {
+                    firstNum = "-";
+                    outputText.textContent = "-";
+                }
+            }
+            else if (firstNum != '') {
                 if (!operatorJustPressed) operatorCount++;
                 if (operatorCount == 1) {
                     operator = element.textContent;
@@ -113,7 +119,7 @@ function inputButton(element) {
                     secondNum = "";
                 }
                 operatorJustPressed = true;
-            }
+            } 
         }
         const buttons = document.querySelectorAll('button');
         buttons.forEach((button)=> button.classList.remove('operator-effect'));
