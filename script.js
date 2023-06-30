@@ -56,6 +56,19 @@ function inputButton(element) {
                 operatorCount = 0;
                 operator = "";
             }
+        } else if (element.classList.contains('delete')) {
+            if (!operatorJustPressed){
+                if (operatorCount == 1) {
+                    secondNum = secondNum.slice(0, secondNum.length-1);
+                    secondNum = (secondNum) ? secondNum : "";
+                    outputText.textContent = secondNum;
+                } else if (operatorCount == 0) {
+                    firstNum = `${firstNum}`;
+                    firstNum = firstNum.slice(0, firstNum.length-1);
+                    firstNum = firstNum ? firstNum : "";
+                    outputText.textContent = firstNum;
+                }
+            }
         }
         else if (!element.classList.contains('operator')) {
             if (operatorJustPressed) {
@@ -71,7 +84,6 @@ function inputButton(element) {
             outputText.textContent += element.textContent;
         } else {
             if (!operatorJustPressed) operatorCount++;
-            operatorJustPressed = true;
             if (operatorCount == 1) {
                 operator = element.textContent;
             }
@@ -82,10 +94,11 @@ function inputButton(element) {
                 operator = element.textContent;
                 secondNum = "";
             }
+            operatorJustPressed = true;
         }
         console.table(firstNum, operator, secondNum, operatorCount, operatorJustPressed);
     }
-} // 3 + 7 + 9
+}
 
 function add(a, b) {
     return a + b;
