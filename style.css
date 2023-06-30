@@ -5,6 +5,7 @@
     /* border: 2px solid red; */
     color: white;
     font-size: 1.05rem;
+    cursor: url('cursor.png'), default;
 }
 
 body {
@@ -36,8 +37,14 @@ body {
     justify-content: flex-end;
     border-radius: 3em;
     background-color: rgba(181, 204, 255, 0.1);
-    border: .15em solid;
+    border-top:.1em solid;
+    border-left :.1em solid;
+    border-right: .2em solid;
+    border-bottom: .2em solid;
     border-color: rgb(255, 154, 255);
+    box-shadow: 0em 0em 5em rgba(125, 0, 156, 0.459);
+    /* border-top-color: white;
+    border-left-color: white; */
 }
 
 .output {
@@ -77,6 +84,8 @@ button {
     outline: none;
     box-shadow: none;
     border: .15em solid pink;
+    font-weight: 600;
+    transition: .07s;
 }
 
 .button-row button {
@@ -106,4 +115,9 @@ button {
 .footer {
     flex: 1 1 6em;
     /* min-height: 1000px; */
+}
+
+.hover-effect {
+    transform: scale(1.15);
+    box-shadow: 0em 0em 2em rgba(255, 192, 203, 0.116);
 }
