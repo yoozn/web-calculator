@@ -53,12 +53,14 @@ function inputButton(element) {
         operatorCount = 0;
         operatorJustPressed = false;
         historyText.textContent = "";
+        middleMiddle.classList.add('reset-effect');
+        middleMiddle.addEventListener('transitionend', () => middleMiddle.classList.remove('reset-effect'));
     }
     else {
         if (element.classList.contains('equals')) {
             if (operatorCount == 1) {
                 firstNum = operate(firstNum, operator, secondNum);
-                outputText.textContent = (firstNum < 1000) ? firstNum : firstNum.toExponential(4);
+                outputText.textContent = ((Math.floor(firstNum * 10000) / 10000) < 10000) ? firstNum : firstNum.toExponential(4);
                 operatorJustPressed = false;
                 secondNum = "";
                 operatorCount = 0;
@@ -69,12 +71,12 @@ function inputButton(element) {
                 if (operatorCount == 1) {
                     secondNum = secondNum.slice(0, secondNum.length-1);
                     secondNum = (secondNum) ? secondNum : "";
-                    outputText.textContent = secondNum < 1000 ? secondNum : Number(secondNum).toExponential(4);
+                    outputText.textContent = ((Math.floor(secondNum* 10000) / 10000) < 10000) ? secondNum : Number(secondNum).toExponential(4);
                 } else if (operatorCount == 0) {
                     firstNum = `${firstNum}`;
                     firstNum = firstNum.slice(0, firstNum.length-1);
                     firstNum = firstNum ? firstNum : "";
-                    outputText.textContent = firstNum < 1000 ? firstNum : Number(firstNum).toExponential(4);
+                    outputText.textContent = ((Math.floor(firstNum * 10000) / 10000) < 10000) ? firstNum : Number(firstNum).toExponential(4);
                 }
             }
         }
@@ -115,7 +117,7 @@ function inputButton(element) {
                 else if (!operatorJustPressed){
                     operatorCount = 1;
                     firstNum = operate(firstNum, operator, secondNum);
-                    outputText.textContent = (firstNum < 1000) ? firstNum : firstNum.toExponential(4);
+                    outputText.textContent = (Math.floor(firstNum * 10000) / 10000 < 10000) ? firstNum : firstNum.toExponential(4);
                     operator = element.textContent;
                     secondNum = "";
                 }
