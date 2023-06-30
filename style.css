@@ -58,6 +58,7 @@ body {
     flex-direction: column;
     display: flex;
     justify-content: flex-end;
+    font-family: "IBM Plex Sans";
 }
 
 .history {
