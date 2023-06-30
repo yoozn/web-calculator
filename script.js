@@ -1,5 +1,6 @@
 const buttons = document.querySelectorAll('button');
 const outputText = document.querySelector('.output-text');
+const historyText = document.querySelector('.history');
 
 let firstArg = true;
 let firstNum = "";
@@ -7,6 +8,7 @@ let operator = "";
 let operatorCount = 0;
 let operatorJustPressed = false;
 let secondNum = "";
+let outputPastText = "";
 
 function onHover(element) {
     element.addEventListener('mouseover', (e)=> {
@@ -85,18 +87,20 @@ function inputButton(element) {
             } else firstNum += element.textContent;
             outputText.textContent += element.textContent;
         } else {
-            if (!operatorJustPressed) operatorCount++;
-            if (operatorCount == 1) {
-                operator = element.textContent;
+            if (firstNum != '') {
+                if (!operatorJustPressed) operatorCount++;
+                if (operatorCount == 1) {
+                    operator = element.textContent;
+                }
+                else if (!operatorJustPressed){
+                    operatorCount = 1;
+                    firstNum = operate(firstNum, operator, secondNum);
+                    outputText.textContent = firstNum;
+                    operator = element.textContent;
+                    secondNum = "";
+                }
+                operatorJustPressed = true;
             }
-            else if (!operatorJustPressed){
-                operatorCount = 1;
-                firstNum = operate(firstNum, operator, secondNum);
-                outputText.textContent = firstNum;
-                operator = element.textContent;
-                secondNum = "";
-            }
-            operatorJustPressed = true;
         }
         const buttons = document.querySelectorAll('button');
         buttons.forEach((button)=> button.classList.remove('operator-effect'));
@@ -120,6 +124,8 @@ function inputButton(element) {
                 break;
         }
         console.table(firstNum, operator, secondNum, operatorCount, operatorJustPressed);
+        let outputPastText = `${firstNum} ${operator} ${secondNum}`;
+        historyText.textContent = outputPastText;
     }
 }
 

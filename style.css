@@ -48,13 +48,25 @@ body {
 }
 
 .output {
+    flex: 0 1 15%;
     width: 85%;
     margin-bottom: 4em;
     text-align:end;
     background-color: rgba(249, 207, 255, 0.014);
     border-radius: 1em;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-end;
 }
+
+.history {
+    flex: 1 1 40%;
+    font-size: 1.5rem;
+    margin-right: 2em;
+}
+
 .output-text {
+    flex: 1 1 60%;
     font-size: 3rem;
     margin-right: .5em;
 }
