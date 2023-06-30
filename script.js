@@ -1,6 +1,11 @@
 const buttons = document.querySelectorAll('button');
-const page = document.querySelector('*');
-
+const outputText = document.querySelector('.output-text');
+let firstArg = true;
+let firstNum = "";
+let operator = "";
+let operatorCount = 0;
+let operatorJustPressed = false;
+let secondNum = "";
 
 function onHover(element) {
     element.addEventListener('mouseover', (e)=> {
@@ -19,6 +24,7 @@ function onClick(element) {
     });
     element.addEventListener('mouseup', () => {
         element.classList.remove('click-effect');
+        inputButton(element);
     });
     element.addEventListener('mouseleave', () => {
         element.classList.remove('click-effect');
@@ -31,4 +37,84 @@ function initializeButtons(buttons) {
 }
 
 initializeButtons(buttons);
+
+function inputButton(element) {
+    if (outputText.textContent.length < 10) {
+        if (element.classList.contains('AC')) {
+            outputText.textContent = "0";
+            firstNum = "";
+            secondNum = "";
+            operator = "";
+            operatorCount = 0;
+            operatorJustPressed = false;
+        } else if (element.classList.contains('equals')) {
+            if (operatorCount == 1) {
+                firstNum = operate(firstNum, operator, secondNum);
+                outputText.textContent = firstNum;
+                operatorJustPressed = false;
+                secondNum = "";
+                operatorCount = 0;
+                operator = "";
+            }
+        }
+        else if (!element.classList.contains('operator')) {
+            if (operatorJustPressed) {
+                outputText.textContent = "";
+                operatorJustPressed = false;
+            } 
+            if (outputText.textContent == "0") {
+                outputText.textContent = "";
+            }
+            if (operatorCount == 1) {
+                secondNum += element.textContent;
+            } else firstNum += element.textContent;
+            outputText.textContent += element.textContent;
+        } else {
+            if (!operatorJustPressed) operatorCount++;
+            operatorJustPressed = true;
+            if (operatorCount == 1) {
+                operator = element.textContent;
+            }
+            else if (!operatorJustPressed){
+                operatorCount = 1;
+                firstNum = operate(firstNum, operator, secondNum);
+                outputText.textContent = firstNum;
+                operator = element.textContent;
+                secondNum = "";
+            }
+        }
+        console.table(firstNum, operator, secondNum, operatorCount, operatorJustPressed);
+    }
+} // 3 + 7 + 9
+
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a,b) {
+    return a - b;
+}
+
+function multiply(a,b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    return a / b;
+}
+
+function operate(a, operator, b) {
+    a = Number(a);
+    b = Number(b);
+    switch (operator) {
+        case "+":
+            return add(a, b);
+        case "-":
+            return subtract(a,b);
+        case "*":
+            return multiply(a,b);
+        case "/":
+            return divide(a,b);
+    }
+}
 
