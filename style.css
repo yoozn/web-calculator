@@ -68,7 +68,7 @@ body {
 .output-text {
     flex: 1 1 60%;
     font-size: 3rem;
-    margin-right: .5em;
+    margin-right: .36em;
 }
 
 .buttons-container {
@@ -147,5 +147,6 @@ button {
 .operator-effect {
     transform: scale(1.2);
     box-shadow: 0em 0em 3em rgb(0, 204, 255);
+    color:rgb(0, 204, 255);
 }
 

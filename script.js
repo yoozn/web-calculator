@@ -1,4 +1,5 @@
 const buttons = document.querySelectorAll('button');
+const body = document.querySelector('body');
 const outputText = document.querySelector('.output-text');
 const historyText = document.querySelector('.history');
 
@@ -49,12 +50,13 @@ function inputButton(element) {
         operator = "";
         operatorCount = 0;
         operatorJustPressed = false;
+        outputPastText = "";
     }
-    else if (outputText.textContent.length < 10) {
+    else {
         if (element.classList.contains('equals')) {
             if (operatorCount == 1) {
                 firstNum = operate(firstNum, operator, secondNum);
-                outputText.textContent = firstNum;
+                outputText.textContent = (firstNum < 1000) ? firstNum : firstNum.toExponential(4);
                 operatorJustPressed = false;
                 secondNum = "";
                 operatorCount = 0;
@@ -74,7 +76,8 @@ function inputButton(element) {
                 }
             }
         }
-        else if (!element.classList.contains('operator')) {
+        else if (!element.classList.contains('operator') && 
+                (outputText.textContent.length < 10 || operatorJustPressed)) {
             if (operatorJustPressed) {
                 outputText.textContent = "";
                 operatorJustPressed = false;
@@ -86,7 +89,7 @@ function inputButton(element) {
                 secondNum += element.textContent;
             } else firstNum += element.textContent;
             outputText.textContent += element.textContent;
-        } else {
+        } else if (element.classList.contains('operator')) {
             if (firstNum != '') {
                 if (!operatorJustPressed) operatorCount++;
                 if (operatorCount == 1) {
@@ -95,7 +98,7 @@ function inputButton(element) {
                 else if (!operatorJustPressed){
                     operatorCount = 1;
                     firstNum = operate(firstNum, operator, secondNum);
-                    outputText.textContent = firstNum;
+                    outputText.textContent = (firstNum < 1000) ? firstNum : firstNum.toExponential(4);
                     operator = element.textContent;
                     secondNum = "";
                 }
@@ -124,7 +127,7 @@ function inputButton(element) {
                 break;
         }
         console.table(firstNum, operator, secondNum, operatorCount, operatorJustPressed);
-        let outputPastText = `${firstNum} ${operator} ${secondNum}`;
+        let outputPastText = `${firstNum < 100000 ? firstNum : Number(firstNum).toExponential(6)} ${operator} ${secondNum}`;
         historyText.textContent = outputPastText;
     }
 }
@@ -150,13 +153,17 @@ function operate(a, operator, b) {
     b = Number(b);
     switch (operator) {
         case "+":
-            return add(a, b);
+            return Math.floor(add(a, b) * 10000000) / 10000000;
         case "-":
-            return subtract(a,b);
+            return Math.floor(subtract(a,b) * 10000000) / 10000000;
         case "*":
-            return multiply(a,b);
+            return Math.floor(multiply(a,b) * 10000000) / 10000000;
         case "/":
-            return divide(a,b);
+            return Math.floor(divide(a,b) * 10000000) / 10000000;
     }
 }
+
+body.addEventListener('keydown', (e)=> {
+    console.log(e.code);1
+})
 
