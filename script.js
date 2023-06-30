@@ -13,6 +13,22 @@ function onHover(element) {
     });
 }
 
-buttons.forEach(onHover);
-console.log(buttons);
+function onClick(element) {
+    element.addEventListener('mousedown', () => {
+        element.classList.add('click-effect');
+    });
+    element.addEventListener('mouseup', () => {
+        element.classList.remove('click-effect');
+    });
+    element.addEventListener('mouseleave', () => {
+        element.classList.remove('click-effect');
+    })
+}
+
+function initializeButtons(buttons) {
+    buttons.forEach(onHover);
+    buttons.forEach(onClick);
+}
+
+initializeButtons(buttons);
 
