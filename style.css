@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 2px solid red;
+}
+
+body {
+    background-image: radial-gradient(rgb(19, 4, 63), rgb(7, 10, 14));
+}
+
+.container {
+    display :flex;
+    flex-direction: column;
+}
+
+.middle {
+    display: flex;
+    flex: 1 1 35em;
+}
+
+.middle-left,
+.middle-right {
+    flex: 1 .5 5em;
+}
+
+.middle-middle {
+    flex: .7 1 1em;
+    border-radius: 3em;
+}
+
+.header,
+.footer {
+    flex: 1 1 6em;
+    /* min-height: 1000px; */
+}
