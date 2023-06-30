@@ -1,5 +1,6 @@
 const buttons = document.querySelectorAll('button');
 const body = document.querySelector('body');
+const middleMiddle = document.querySelector('.middle-middle');
 const outputText = document.querySelector('.output-text');
 const historyText = document.querySelector('.history');
 
@@ -219,6 +220,8 @@ body.addEventListener('keydown', (e)=> {
         else if (e.code == "Escape") {
             const button = document.querySelector('.AC');
             onKeypress(button);
+            middleMiddle.classList.add('reset-effect');
+            middleMiddle.addEventListener('transitionend', () => middleMiddle.classList.remove('reset-effect'));
         }
     }
 })

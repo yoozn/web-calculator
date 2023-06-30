@@ -43,6 +43,7 @@ body {
     border-bottom: .2em solid;
     border-color: rgb(255, 154, 255);
     box-shadow: 0em 0em 5em rgba(125, 0, 156, 0.459);
+    transition: .11s;
     /* border-top-color: white;
     border-left-color: white; */
 }
@@ -154,5 +155,10 @@ button {
     transform: scale(1.2);
     box-shadow: 0em 0em 3em rgb(0, 204, 255);
     color:rgb(0, 204, 255);
+}
+
+.reset-effect {
+    transform: scale(1.05) rotate(10deg);
+    box-shadow: 0em 0em 10em rgba(45, 213, 255, 0.726);
 }
 
