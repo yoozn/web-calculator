@@ -126,6 +126,15 @@ button {
     background-color: rgb(0, 34, 97);
 }
 
+.buttons-right button.equals,
+.buttons-right button.badd {
+    flex: 1 1 30%;
+}
+.buttons-right button.bmul,
+.buttons-right button.bsub {
+    flex: 1 1 20%;
+}
+
 
 
 .header,
