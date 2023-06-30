@@ -68,12 +68,12 @@ function inputButton(element) {
                 if (operatorCount == 1) {
                     secondNum = secondNum.slice(0, secondNum.length-1);
                     secondNum = (secondNum) ? secondNum : "";
-                    outputText.textContent = secondNum;
+                    outputText.textContent = secondNum < 1000 ? secondNum : Number(secondNum).toExponential(4);
                 } else if (operatorCount == 0) {
                     firstNum = `${firstNum}`;
                     firstNum = firstNum.slice(0, firstNum.length-1);
                     firstNum = firstNum ? firstNum : "";
-                    outputText.textContent = firstNum;
+                    outputText.textContent = firstNum < 1000 ? firstNum : Number(firstNum).toExponential(4);
                 }
             }
         }
