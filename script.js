@@ -10,6 +10,7 @@ let operatorCount = 0;
 let operatorJustPressed = false;
 let secondNum = "";
 let outputPastText = "";
+let shiftPressed = false;
 
 function onHover(element) {
     element.addEventListener('mouseover', (e)=> {
@@ -50,7 +51,7 @@ function inputButton(element) {
         operator = "";
         operatorCount = 0;
         operatorJustPressed = false;
-        outputPastText = "";
+        historyText.textContent = "";
     }
     else {
         if (element.classList.contains('equals')) {
@@ -78,6 +79,15 @@ function inputButton(element) {
         }
         else if (!element.classList.contains('operator') && 
                 (outputText.textContent.length < 10 || operatorJustPressed)) {
+                    if (element.classList.contains('bdec')) {
+                        if (operatorJustPressed) return;
+                        else  if (operatorCount == 0){
+                            if (firstNum == "") return;
+                            if (firstNum.includes(".")) return;
+                        } else if (operatorCount == 1) {
+                            if(secondNum.includes(".")) return;
+                        }
+                    }
             if (operatorJustPressed) {
                 outputText.textContent = "";
                 operatorJustPressed = false;
@@ -164,6 +174,58 @@ function operate(a, operator, b) {
 }
 
 body.addEventListener('keydown', (e)=> {
-    console.log(e.code);1
+    if (e.code.toLowerCase().includes("shift")) {
+        shiftPressed = true;
+    }
+    if (shiftPressed) {
+        if(e.code == "Equal") {
+            const button = document.querySelector('.badd');
+            inputButton(button);
+        }
+        else if (e.code == "Digit8") inputButton(document.querySelector('.bmul'));
+    }
+    else {
+        if (e.code.includes("Digit")) {
+            let num = e.code.slice(-1);
+            const button = document.querySelector(`.b${num}`);
+            onKeypress(button);
+        }
+        else if (e.code == "Equal" || e.code == "Enter") {
+            const button = document.querySelector('.equals');
+            onKeypress(button);
+        }
+        else if (e.code == "Minus") {
+            const button = document.querySelector('.bsub');
+            inputButton(button);
+        } 
+        else if (e.code == "Slash") {
+            const button = document.querySelector('.bdiv');
+            inputButton(button);
+        } 
+        else if (e.code == "Period") {
+            const button = document.querySelector('.bdec');
+            onKeypress(button);
+        } 
+        else if (e.code == "Backspace") {
+            const button = document.querySelector('.delete');
+            onKeypress(button);
+        } 
+        else if (e.code == "Escape") {
+            const button = document.querySelector('.AC');
+            onKeypress(button);
+        }
+    }
+})
+
+function onKeypress(button) {
+    inputButton(button);
+    button.classList.add('press-effect');
+    button.addEventListener('transitionend', ()=> button.classList.remove('press-effect'));
+}
+
+body.addEventListener('keyup', (e)=> {
+    if (e.code.toLowerCase().includes("shift")) {
+        shiftPressed = false;
+    }
 })
 
