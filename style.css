@@ -109,6 +109,10 @@ button {
     background-color: rgb(0, 34, 97);
 }
 
+.buttons-left .button-row .bdiv {
+    background-color: rgb(0, 34, 97);
+}
+
 
 
 .header,
@@ -127,3 +131,9 @@ button {
     transform: scale(.95);
     box-shadow: 0em 0em 3.5em rgba(251, 237, 255, 0.616);
 }
+
+.operator-effect {
+    transform: scale(1.2);
+    box-shadow: 0em 0em 3em rgb(0, 204, 255);
+}
+

@@ -1,5 +1,6 @@
 const buttons = document.querySelectorAll('button');
 const outputText = document.querySelector('.output-text');
+
 let firstArg = true;
 let firstNum = "";
 let operator = "";
@@ -39,15 +40,16 @@ function initializeButtons(buttons) {
 initializeButtons(buttons);
 
 function inputButton(element) {
-    if (outputText.textContent.length < 10) {
-        if (element.classList.contains('AC')) {
-            outputText.textContent = "0";
-            firstNum = "";
-            secondNum = "";
-            operator = "";
-            operatorCount = 0;
-            operatorJustPressed = false;
-        } else if (element.classList.contains('equals')) {
+    if (element.classList.contains('AC')) {
+        outputText.textContent = "0";
+        firstNum = "";
+        secondNum = "";
+        operator = "";
+        operatorCount = 0;
+        operatorJustPressed = false;
+    }
+    else if (outputText.textContent.length < 10) {
+        if (element.classList.contains('equals')) {
             if (operatorCount == 1) {
                 firstNum = operate(firstNum, operator, secondNum);
                 outputText.textContent = firstNum;
@@ -95,6 +97,27 @@ function inputButton(element) {
                 secondNum = "";
             }
             operatorJustPressed = true;
+        }
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach((button)=> button.classList.remove('operator-effect'));
+        switch (operator) {
+            case "+":
+                const badd = document.querySelector('.badd');
+                badd.classList.add('operator-effect');
+                break;
+            case "-":
+                const bsub = document.querySelector('.bsub');
+                console.log(bsub);
+                bsub.classList.add('operator-effect');
+                break;
+            case "*":
+                const bmul = document.querySelector('.bmul');
+                bmul.classList.add('operator-effect');
+                break;
+            case "/":
+                const bdiv = document.querySelector('.bdiv');
+                bdiv.classList.add('operator-effect');
+                break;
         }
         console.table(firstNum, operator, secondNum, operatorCount, operatorJustPressed);
     }
