@@ -60,7 +60,7 @@ function inputButton(element) {
         if (element.classList.contains('equals')) {
             if (operatorCount == 1) {
                 firstNum = operate(firstNum, operator, secondNum);
-                outputText.textContent = ((Math.floor(firstNum * 10000) / 10000) < 10000) ? firstNum : firstNum.toExponential(4);
+                outputText.textContent = (`${firstNum}`.length < 8) ? firstNum : firstNum.toExponential(4);
                 operatorJustPressed = false;
                 secondNum = "";
                 operatorCount = 0;
@@ -71,17 +71,17 @@ function inputButton(element) {
                 if (operatorCount == 1) {
                     secondNum = secondNum.slice(0, secondNum.length-1);
                     secondNum = (secondNum) ? secondNum : "";
-                    outputText.textContent = ((Math.floor(secondNum* 10000) / 10000) < 10000) ? secondNum : Number(secondNum).toExponential(4);
+                    outputText.textContent = (`${secondNum}`.length < 8) ? secondNum : Number(secondNum).toExponential(4);
                 } else if (operatorCount == 0) {
                     firstNum = `${firstNum}`;
                     firstNum = firstNum.slice(0, firstNum.length-1);
                     firstNum = firstNum ? firstNum : "";
-                    outputText.textContent = ((Math.floor(firstNum * 10000) / 10000) < 10000) ? firstNum : Number(firstNum).toExponential(4);
+                    outputText.textContent = (`${firstNum}`.length < 8) ? firstNum : Number(firstNum).toExponential(4);
                 }
             }
         }
         else if (!element.classList.contains('operator') && 
-                (outputText.textContent.length < 10 || operatorJustPressed)) {
+                (outputText.textContent.length < 9 || operatorJustPressed)) {
                     if (element.classList.contains('bdec')) {
                         if (operatorJustPressed) return;
                         else  if (operatorCount == 0){
@@ -117,7 +117,7 @@ function inputButton(element) {
                 else if (!operatorJustPressed){
                     operatorCount = 1;
                     firstNum = operate(firstNum, operator, secondNum);
-                    outputText.textContent = (Math.floor(firstNum * 10000) / 10000 < 10000) ? firstNum : firstNum.toExponential(4);
+                    outputText.textContent = `${firstNum}`.length < 8 ? firstNum : firstNum.toExponential(4);
                     operator = element.textContent;
                     secondNum = "";
                 }
